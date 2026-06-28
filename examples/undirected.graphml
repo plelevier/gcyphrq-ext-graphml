@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <graph edgedefault="undirected">
+    <node id="a">
+      <data key="label">City</data>
+      <data key="name">Paris</data>
+    </node>
+    <node id="b">
+      <data key="label">City</data>
+      <data key="name">Lyon</data>
+    </node>
+    <node id="c">
+      <data key="label">City</data>
+      <data key="name">Marseille</data>
+    </node>
+    <edge id="e1" source="a" target="b"/>
+    <edge id="e2" source="b" target="c"/>
+    <edge id="e3" source="a" target="c"/>
+  </graph>
+</graphml>

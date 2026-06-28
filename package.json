@@ -1,0 +1,52 @@
+{
+  "name": "gcyphrq-ext-graphml",
+  "version": "0.1.0",
+  "description": "GraphML graph format extension for gcyphrq",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "graphology": "^0.26.0",
+    "graphology-graphml": "^0.5.2"
+  },
+  "peerDependencies": {
+    "gcyphrq": ">=0.61.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.9"
+  },
+  "keywords": [
+    "gcyphrq",
+    "gcyphrq-extension",
+    "graphml",
+    "graph"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plelevier/gcyphrq-ext-graphml"
+  },
+  "gcyphrqExtensions": {
+    "graphml": {
+      "type": "graph-input",
+      "description": "Convert GraphML files to gcyphrq graph format",
+      "entryPoint": "./dist/index.js",
+      "fileExtensions": [
+        ".graphml",
+        ".xml"
+      ]
+    }
+  }
+}
