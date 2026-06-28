@@ -26,6 +26,15 @@ function graphologyToGraphInput(
 
   for (const id of graph.nodes()) {
     const attrs = { ...graph.getNodeAttributes(id) } as Record<string, unknown>;
+    // When a GraphML <key> element lacks attr.name, graphology-graphml stores
+    // the data under an empty string key (""). Remap it to the expected property,
+    // or discard it if the named property already exists.
+    if (attrs[''] !== undefined) {
+      if (attrs[labelProperty] === undefined) {
+        attrs[labelProperty] = attrs[''];
+      }
+      delete attrs[''];
+    }
     // GraphML stores the node label in a "label" data element by default.
     // If the user provided a custom labelProperty and the node doesn't
     // already have that property, remap the attribute name.
@@ -49,6 +58,15 @@ function graphologyToGraphInput(
 
   graph.forEachEdge((edgeId, attrs, source, target) => {
     const edgeAttrs = { ...attrs } as Record<string, unknown>;
+    // When a GraphML <key> element lacks attr.name, graphology-graphml stores
+    // the data under an empty string key (""). Remap it to the expected property,
+    // or discard it if the named property already exists.
+    if (edgeAttrs[''] !== undefined) {
+      if (edgeAttrs[edgeTypeProperty] === undefined) {
+        edgeAttrs[edgeTypeProperty] = edgeAttrs[''];
+      }
+      delete edgeAttrs[''];
+    }
     // GraphML stores the relationship type in a "type" data element by default.
     // If the user provided a custom edgeTypeProperty and the edge doesn't
     // already have that property, we don't need to remap — the graphml parser
