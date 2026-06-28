@@ -5,6 +5,10 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js"
+  },
   "files": [
     "dist",
     "examples",
@@ -37,6 +41,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/plelevier/gcyphrq-ext-graphml"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
   },
   "gcyphrqExtensions": {
     "graphml": {

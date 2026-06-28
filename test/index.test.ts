@@ -93,7 +93,38 @@ describe('graphml extension', () => {
         content: 'not xml',
         filePath: 'invalid.graphml',
       })
-    ).rejects.toThrow();
+    ).rejects.toThrow('invalid.graphml');
+  });
+
+  it('accepts Buffer content', async () => {
+    const result = await graphmlExtension.convert({
+      content: Buffer.from(simpleGraphml),
+      filePath: 'test.graphml',
+    });
+
+    expect(result.nodes).toHaveLength(2);
+    expect(result.nodes[0]?.key).toBe('0');
+    expect(result.edges).toHaveLength(1);
+  });
+
+  it('respects custom labelProperty', async () => {
+    const result = await graphmlExtension.convert({
+      content: simpleGraphml,
+      filePath: 'test.graphml',
+      labelProperty: 'kind',
+    });
+
+    expect(result.nodes[0]?.attributes.kind).toBe('Person');
+    expect(result.nodes[0]?.attributes.label).toBeUndefined();
+  });
+
+  it('keeps label as-is when labelProperty is default', async () => {
+    const result = await graphmlExtension.convert({
+      content: simpleGraphml,
+      filePath: 'test.graphml',
+    });
+
+    expect(result.nodes[0]?.attributes.label).toBe('Person');
   });
 
   it('preserves node label as node kind', async () => {
